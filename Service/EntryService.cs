@@ -38,9 +38,16 @@ namespace M223PunchclockDotnet.Service
             {
                 throw new NullReferenceException($"No entry with id {entryId} found.");
             }
-            
-            entry.CheckIn = entryData.CheckIn;
-            entry.CheckOut = entryData.CheckOut;
+
+            if (entryData.CheckIn.HasValue)
+            {
+                entry.CheckIn = entryData.CheckIn.Value;
+            }
+
+            if (entryData.CheckOut.HasValue)
+            {
+                entry.CheckOut = entryData.CheckOut.Value;
+            }
         }
     }
 }
