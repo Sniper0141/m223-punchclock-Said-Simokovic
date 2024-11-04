@@ -9,30 +9,28 @@ namespace M223PunchclockDotnet.Controllers
     [Route("entry")]
     public class EntryController : ControllerBase
     {
-        private readonly EntryService _entryService;
+        private readonly EntryService entryService;
 
         public EntryController(EntryService entryService)
         {
-            _entryService = entryService;
+            this.entryService = entryService;
         }
 
         [HttpGet]
         [ProducesResponseType<Entry>(StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            var allEntries = await _entryService.FindAll();
+            var allEntries = await entryService.FindAll();
             return Ok(allEntries);
         }
 
-        [HttpPost()]
+        [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType<Entry>(StatusCodes.Status201Created)]
         public async Task<ActionResult<Entry>> AddEntry(Entry entry){
-            var newElement = await _entryService.AddEntry(entry);
+            var newElement = await entryService.AddEntry(entry);
 
             return CreatedAtAction(nameof(Get), new{id = entry.Id}, entry);
         }
-
-        
     }
 }
