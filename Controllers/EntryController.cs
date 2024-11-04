@@ -32,5 +32,13 @@ namespace M223PunchclockDotnet.Controllers
 
             return CreatedAtAction(nameof(Get), new{id = entry.Id}, entry);
         }
+
+        [HttpDelete]
+        [Consumes(MediaTypeNames.Application.Json)]
+        public async Task<IActionResult> DeleteEntryWithId(int id)
+        {
+            await entryService.DeleteEntry(id);
+            return NoContent();
+        }
     }
 }
