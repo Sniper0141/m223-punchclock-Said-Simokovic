@@ -41,7 +41,7 @@ namespace M223PunchclockDotnet.Controllers
             return NoContent();
         }
 
-        [HttpPatch("/{id:int}")]
+        [HttpPatch("{id:int}")]
         [Consumes(MediaTypeNames.Application.Json)]
         public async Task<IActionResult> EditEntryWithId(int id, EditedEntryData editedEntryData)
         {
