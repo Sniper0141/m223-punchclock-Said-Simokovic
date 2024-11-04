@@ -48,6 +48,16 @@ const editEntry = (e) => {
             renderEntries();
         });
     });
+    
+    const successElement = document.querySelector('#edit-success')
+    successElement.classList.add('show');
+
+    sleep(2000).then(() => { 
+        successElement.classList.remove('show');
+    });
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 const indexEntries = () => {
