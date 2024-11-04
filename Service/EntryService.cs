@@ -1,4 +1,5 @@
-﻿using M223PunchclockDotnet.Model;
+﻿using M223PunchclockDotnet.Controllers;
+using M223PunchclockDotnet.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace M223PunchclockDotnet.Service
@@ -28,6 +29,18 @@ namespace M223PunchclockDotnet.Service
             
             databaseContext.Entries.Remove(entry);
             await databaseContext.SaveChangesAsync();
+        }
+
+        public async Task EditEntry(int entryId, EditedEntryData entryData)
+        {
+            var entry = await databaseContext.FindAsync<Entry>(entryId);
+            if (entry is null)
+            {
+                throw new NullReferenceException($"No entry with id {entryId} found.");
+            }
+            
+            entry.CheckIn = entryData.CheckIn;
+            entry.CheckOut = entryData.CheckOut;
         }
     }
 }
