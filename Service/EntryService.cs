@@ -17,5 +17,17 @@ namespace M223PunchclockDotnet.Service
 
             return entry;
         }
+
+        public async Task DeleteEntry(int entryId)
+        {
+            var entry = await databaseContext.FindAsync<Entry>(entryId);
+            if (entry is null)
+            {
+                throw new NullReferenceException($"No entry with id {entryId} found.");
+            }
+            
+            databaseContext.Entries.Remove(entry);
+            await databaseContext.SaveChangesAsync();
+        }
     }
 }
