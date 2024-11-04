@@ -40,5 +40,14 @@ namespace M223PunchclockDotnet.Controllers
             await entryService.DeleteEntry(id);
             return NoContent();
         }
+
+        [HttpPatch]
+        [Route("{id:int}")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        public async Task<IActionResult> EditEntryWithId(int id, EditedEntryData editedEntryData)
+        {
+            await entryService.EditEntry(id, editedEntryData);
+            return Ok();
+        }
     }
 }
