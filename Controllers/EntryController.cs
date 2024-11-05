@@ -28,10 +28,10 @@ namespace M223PunchclockDotnet.Controllers
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType<Entry>(StatusCodes.Status201Created)]
-        public async Task<ActionResult<Entry>> AddEntry(Entry entry){
-            var newElement = await entryService.AddEntry(entry);
+        public async Task<ActionResult<Entry>> AddEntry(NewEntryData entryData){
+            var newElement = await entryService.AddEntry(entryData);
 
-            return CreatedAtAction(nameof(Get), new{id = entry.Id}, entry);
+            return CreatedAtAction(nameof(Get), new{id = entryData.Id}, entryData);
         }
 
         [HttpDelete]
