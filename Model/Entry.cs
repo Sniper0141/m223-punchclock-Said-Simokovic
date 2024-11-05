@@ -1,9 +1,10 @@
-﻿namespace M223PunchclockDotnet.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace M223PunchclockDotnet.Model
 {
-    public class Entry
+    [Table("Entry")]
+    public class Entry : DbModel
     {
-        public int Id { get; set; }
-        
         public required DateTime CheckIn { get; set; }
         
         public required DateTime CheckOut { get; set; }
