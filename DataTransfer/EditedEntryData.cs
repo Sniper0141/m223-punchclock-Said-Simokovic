@@ -1,4 +1,4 @@
-namespace M223PunchclockDotnet.Controllers;
+namespace M223PunchclockDotnet.DataTransfer;
 
 public record EditedEntryData
 {

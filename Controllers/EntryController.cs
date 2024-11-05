@@ -1,4 +1,5 @@
 using System.Net.Mime;
+using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using M223PunchclockDotnet.Service;
 using Microsoft.AspNetCore.Mvc;
