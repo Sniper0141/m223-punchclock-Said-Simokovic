@@ -1,4 +1,5 @@
 ﻿using M223PunchclockDotnet.Controllers;
+using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +12,13 @@ namespace M223PunchclockDotnet.Service
             return databaseContext.Entries.ToListAsync();
         }
 
-        public async Task<Entry> AddEntry(Entry entry)
+        public async Task<Entry> AddEntry(NewEntryData entryData)
         {
+            var entry = new Entry
+            {
+                CheckIn = entryData.CheckIn,
+                CheckOut = entryData.CheckOut
+            };
             databaseContext.Entries.Add(entry);
             await databaseContext.SaveChangesAsync();
 
