@@ -1,5 +1,4 @@
-﻿using M223PunchclockDotnet.Controllers;
-using M223PunchclockDotnet.DataTransfer;
+﻿using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using Microsoft.EntityFrameworkCore;
 
