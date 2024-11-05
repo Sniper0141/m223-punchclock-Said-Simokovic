@@ -1,3 +1,4 @@
+using M223PunchclockDotnet;
 using Microsoft.EntityFrameworkCore;
 using M223PunchclockDotnet.Service;
 using M223PunchclockDotnet.Model;
@@ -17,6 +18,8 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddScoped<EntryService, EntryService>();
+builder.Services.AddScoped<CategoryService, CategoryService>();
+builder.Services.AddScoped<TagService, TagService>();
 
 var app = builder.Build();
 
@@ -38,7 +41,8 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<DatabaseContext>();
     context.Database.EnsureCreated();
-    // DbInitializer.Initialize(context);
+    
+    DbInitializer.Initialize(context);
 }
 
 app.UseDefaultFiles();
