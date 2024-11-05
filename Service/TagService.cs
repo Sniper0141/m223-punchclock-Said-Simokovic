@@ -17,7 +17,7 @@ public class TagService(DatabaseContext databaseContext)
         {
             Title = tagData.Title
         };
-        databaseContext.Categories.Add(tag);
+        databaseContext.Tags.Add(tag);
         await databaseContext.SaveChangesAsync();
 
         return tag;
@@ -31,7 +31,7 @@ public class TagService(DatabaseContext databaseContext)
             throw new NullReferenceException($"No tag with id {tagId} found.");
         }
             
-        databaseContext.Categories.Remove(tag);
+        databaseContext.Tags.Remove(tag);
         await databaseContext.SaveChangesAsync();
     }
 
