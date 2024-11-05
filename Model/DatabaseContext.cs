@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 namespace M223PunchclockDotnet.Model {
 
@@ -15,6 +13,7 @@ namespace M223PunchclockDotnet.Model {
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<Entry>().ToTable("Entry");
+            modelBuilder.Entity<Category>().ToTable("Category");
         }
 
 
