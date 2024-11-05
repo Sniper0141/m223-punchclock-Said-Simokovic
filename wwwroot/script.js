@@ -28,38 +28,6 @@ const createEntry = (e) => {
     });
 };
 
-const editEntry = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const entry = {};
-    const entryId = formData.get('id');
-    entry['checkIn'] = dateAndTimeToDate(formData.get('checkInDate'), formData.get('checkInTime'));
-    entry['checkOut'] = dateAndTimeToDate(formData.get('checkOutDate'), formData.get('checkOutTime'));
-    
-    fetch(`${URL}/entry/${entryId}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(entry)
-    }).then((result) => {
-        result.json().then((entry) => {
-            entries.push(entry);
-            renderEntries();
-        });
-    });
-    
-    const successElement = document.querySelector('#edit-success')
-    successElement.classList.add('show');
-
-    sleep(2000).then(() => { 
-        successElement.classList.remove('show');
-    });
-}
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 const indexEntries = () => {
     fetch(`${URL}/entry`, {
         method: 'GET'
@@ -93,9 +61,6 @@ const renderEntries = () => {
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#createEntryForm');
     createEntryForm.addEventListener('submit', createEntry);
-    
-    const editEntryForm = document.querySelector('#editEntryForm');
-    editEntryForm.addEventListener('submit', editEntry);
     
     indexEntries();
 });
