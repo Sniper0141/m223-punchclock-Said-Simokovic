@@ -6,6 +6,8 @@ const dateAndTimeToDate = (dateString, timeString) => {
 };
 
 const createEntry = (e) => {
+    console.log(e)
+    
     e.preventDefault();
     const formData = new FormData(e.target);
     const entry = {};
@@ -59,5 +61,6 @@ const renderEntries = () => {
 document.addEventListener('DOMContentLoaded', function(){
     const createEntryForm = document.querySelector('#createEntryForm');
     createEntryForm.addEventListener('submit', createEntry);
+    
     indexEntries();
 });
