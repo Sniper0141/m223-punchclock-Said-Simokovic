@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using M223PunchclockDotnet;
 using Microsoft.EntityFrameworkCore;
 using M223PunchclockDotnet.Service;
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
     
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseNpgsql("Host=db;Database=postgres;Username=postgres;Password=postgres"));
