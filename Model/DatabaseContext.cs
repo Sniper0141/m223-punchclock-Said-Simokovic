@@ -7,7 +7,6 @@ namespace M223PunchclockDotnet.Model {
         public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options){
 
         }
-
         
         public DbSet<Entry> Entries { get; set;}
         public DbSet<Category> Categories { get; set; }
@@ -16,6 +15,7 @@ namespace M223PunchclockDotnet.Model {
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.Entity<Entry>().ToTable("Entry");
             modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<Tag>().ToTable("Tag");
         }
 
 

@@ -8,5 +8,11 @@ namespace M223PunchclockDotnet.Model
         public required DateTime CheckIn { get; set; }
         
         public required DateTime CheckOut { get; set; }
+        
+        public required int CategoryId { get; set; }
+        
+        public Category Category { get; set; }
+
+        public List<Tag> Tags { get; set; } = [];
     }
 }

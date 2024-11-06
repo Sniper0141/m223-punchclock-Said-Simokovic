@@ -11,18 +11,21 @@ namespace M223PunchclockDotnet.Controllers;
 public class CategoryController : ControllerBase
 {
     private readonly CategoryService categoryService;
+    private readonly TestDataRepository testDataRepository;
 
-    public CategoryController(CategoryService categoryService)
+    public CategoryController(CategoryService categoryService, TestDataRepository testDataRepository)
     {
         this.categoryService = categoryService;
+        this.testDataRepository = testDataRepository;
     }
 
     [HttpGet]
     [ProducesResponseType<Category>(StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-        var allEntries = await categoryService.FindAll();
-        return Ok(allEntries);
+        var allCategories = await categoryService.FindAll();
+        allCategories.AddRange(testDataRepository.TestCategories);
+        return Ok(allCategories);
     }
 
     [HttpPost]

@@ -11,18 +11,21 @@ namespace M223PunchclockDotnet.Controllers;
 public class TagController : ControllerBase
 {
     private readonly TagService tagService;
+    private readonly TestDataRepository testDataRepository;
 
-    public TagController(TagService tagService)
+    public TagController(TagService tagService, TestDataRepository testDataRepository)
     {
         this.tagService = tagService;
+        this.testDataRepository = testDataRepository;
     }
 
     [HttpGet]
     [ProducesResponseType<Tag>(StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
-        var allEntries = await tagService.FindAll();
-        return Ok(allEntries);
+        var allTags = await tagService.FindAll();
+        allTags.AddRange(testDataRepository.TestTags);
+        return Ok(allTags);
     }
 
     [HttpPost]
