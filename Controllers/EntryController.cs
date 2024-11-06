@@ -11,10 +11,12 @@ namespace M223PunchclockDotnet.Controllers
     public class EntryController : ControllerBase
     {
         private readonly EntryService entryService;
+        private readonly TestDataRepository testDataRepository;
 
-        public EntryController(EntryService entryService)
+        public EntryController(EntryService entryService, TestDataRepository testDataRepository)
         {
             this.entryService = entryService;
+            this.testDataRepository = testDataRepository;
         }
 
         [HttpGet]
@@ -22,6 +24,7 @@ namespace M223PunchclockDotnet.Controllers
         public async Task<IActionResult> Get()
         {
             var allEntries = await entryService.FindAll();
+            allEntries.AddRange(testDataRepository.TestEntries);
             return Ok(allEntries);
         }
 
