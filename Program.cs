@@ -45,7 +45,8 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<DatabaseContext>();
     context.Database.EnsureCreated();
     
-    // DbInitializer.Initialize(context);
+    DbInitializer.Initialize(context); // TODO: Comment this line to stop dropping the db on startup.
+    DbInitializer.InsertExampleData(context);
 }
 
 app.UseDefaultFiles();
