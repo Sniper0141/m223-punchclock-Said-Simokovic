@@ -44,4 +44,14 @@ public static class DbInitializer
                                         CONSTRAINT "FK_Tag" FOREIGN KEY ("TagId") REFERENCES public."Tag"("Id"))
                                      """);
     }
+
+    public static void InsertExampleData(DatabaseContext context)
+    {
+        context.Database.ExecuteSql($"""
+                                     INSERT INTO public."Category" ("Title") VALUES ('this is a sample category');
+                                     INSERT INTO public."Entry" ("CheckIn", "CheckOut", "CategoryId") VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1));
+                                     INSERT INTO public."Tag" ("Title") VALUES ('this is a sample tag'); 
+                                     INSERT INTO public."EntryTag" ("EntryId", "TagId") VALUES (1, 1);
+                                     """);
+    }
 }
