@@ -1,6 +1,6 @@
 using M223PunchclockDotnet.Model;
 
-namespace M223PunchclockDotnet.TestData;
+namespace M223PunchclockDotnet.Service;
 
 public class TestDataRepository
 {
