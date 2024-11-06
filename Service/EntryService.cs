@@ -16,8 +16,10 @@ namespace M223PunchclockDotnet.Service
             var entry = new Entry
             {
                 CheckIn = entryData.CheckIn,
-                CheckOut = entryData.CheckOut
+                CheckOut = entryData.CheckOut,
+                CategoryId = entryData.CategoryId,
             };
+            
             databaseContext.Entries.Add(entry);
             await databaseContext.SaveChangesAsync();
 

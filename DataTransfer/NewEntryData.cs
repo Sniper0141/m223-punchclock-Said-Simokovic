@@ -11,4 +11,7 @@ public class NewEntryData
     
     [Required]
     public DateTime CheckOut { get; set; }
+    
+    [Required]
+    public int CategoryId { get; set; }
 }
