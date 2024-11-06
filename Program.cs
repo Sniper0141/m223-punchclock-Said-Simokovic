@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<EntryService, EntryService>();
 builder.Services.AddScoped<CategoryService, CategoryService>();
 builder.Services.AddScoped<TagService, TagService>();
+builder.Services.AddScoped<TestDataRepository, TestDataRepository>();
 
 var app = builder.Build();
 
