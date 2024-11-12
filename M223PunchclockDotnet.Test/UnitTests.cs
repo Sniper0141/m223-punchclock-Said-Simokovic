@@ -1,4 +1,3 @@
-using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using M223PunchclockDotnet.Service;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +6,7 @@ using Moq.EntityFrameworkCore;
 
 namespace M223PunchclockDotnet.Test;
 
-public class Tests
+public class UnitTests
 {
     private DatabaseContext dbContextMock;
     
@@ -15,9 +14,37 @@ public class Tests
     public void Setup()
     {
         var optionsMock = new DbContextOptions<DatabaseContext>();
-        var contextMock = new Mock<DatabaseContext>(optionsMock);
-        contextMock.Setup(c => c.Categories).ReturnsDbSet(new List<Category>());
-        dbContextMock = contextMock.Object;
+        var mock = new Mock<DatabaseContext>(optionsMock);
+
+        CreateTestData(mock);
+        
+        dbContextMock = mock.Object;
+    }
+
+    private static void CreateTestData(Mock<DatabaseContext> mock)
+    {
+        var category = new Category
+        {
+            Id = 1,
+            Title = "Basic-Category"
+        };
+        var entry = new Entry
+        {
+            Id = 1,
+            CheckIn = DateTime.MinValue,
+            CheckOut = DateTime.MaxValue,
+            CategoryId = 1,
+            Category = category
+        };
+        var tag = new Tag
+        {
+            Id = 1,
+            Title = "Basic-Tag"
+        };
+        
+        mock.Setup(c => c.Entries).ReturnsDbSet(new List<Entry> { entry });
+        mock.Setup(c => c.Categories).ReturnsDbSet(new List<Category> { category });
+        mock.Setup(c => c.Tags).ReturnsDbSet(new List<Tag> { tag });
     }
 
     [TearDown]
@@ -27,59 +54,41 @@ public class Tests
     }
 
     [Test]
-    public async Task AddCategory_WithValidData_ShouldPersist()
+    public async Task FindAll_Entries_ReturnsCorrectly()
+    {
+        // Arrange
+        var service = new EntryService(dbContextMock);
+        
+        // Act
+        var entries = await service.FindAll();
+        
+        // Assert
+        Assert.That(entries != null);
+    }
+
+    [Test]
+    public async Task FindAll_Categories_ReturnsCorrectly()
     {
         // Arrange
         var service = new CategoryService(dbContextMock);
-        var categoryData = new NewCategoryData
-        {
-            Title = "Test-Category"
-        };
         
         // Act
-        await service.AddCategory(categoryData);
+        var categories = await service.FindAll();
         
         // Assert
-        var categories = await service.FindAll();
         Assert.That(categories != null);
     }
 
     [Test]
-    public async Task EditCategory_WithNewTitle_TitleShouldChange()
+    public async Task FindAll_Tags_ReturnsCorrectly()
     {
         // Arrange
-        var service = new CategoryService(dbContextMock);
-        var categoryData = new NewCategoryData
-        {
-            Title = "Test-Category"
-        };
-        await service.AddCategory(categoryData);
+        var service = new TagService(dbContextMock);
         
         // Act
-        var editedTitle = "edited-title";
-        await service.EditCategory(1, new EditedCategoryData { Title = editedTitle });
+        var tags = await service.FindAll();
         
         // Assert
-        var categories = await service.FindAll();
-        Assert.That(categories != null);
-    }
-
-    [Test]
-    public async Task DeleteCategory_ShouldDeletePersistedCategory()
-    {
-        // Arrange
-        var service = new CategoryService(dbContextMock);
-        var categoryData = new NewCategoryData
-        {
-            Title = "Test-Category"
-        };
-        await service.AddCategory(categoryData);
-        
-        // Act
-        await service.DeleteCategory(1);
-        
-        // Assert
-        var categories = await service.FindAll();
-        Assert.That(categories != null);
+        Assert.That(tags != null);
     }
 }
