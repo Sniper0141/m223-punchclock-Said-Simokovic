@@ -2,12 +2,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace M223PunchclockDotnet.Model {
 
-    public class DatabaseContext : DbContext 
+    public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options): base(options){
-
-        }
-        
         public virtual DbSet<Entry> Entries { get; set;}
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
@@ -17,9 +13,5 @@ namespace M223PunchclockDotnet.Model {
             modelBuilder.Entity<Category>().ToTable("Category");
             modelBuilder.Entity<Tag>().ToTable("Tag");
         }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseNpgsql("Host=db;Database=postgres;Username=postgres;Password=postgres");
     }
 }
