@@ -1,15 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>M223PunchclockDotnet</RootNamespace>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>M223PunchclockDotnet</RootNamespace>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="M223PunchclockDotnet.Test\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Remove="M223PunchclockDotnet.Test\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Remove="M223PunchclockDotnet.Test\**"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="M223PunchclockDotnet.Test\**"/>
+    </ItemGroup>
 
 </Project>
