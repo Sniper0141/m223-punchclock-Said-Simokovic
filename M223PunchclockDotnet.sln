@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M223PunchclockDotnet", "M223PunchclockDotnet.csproj", "{894B27DC-EE48-4013-977B-C3FFBF67021B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M223PunchclockDotnet.Test", "M223PunchclockDotnet.Test\M223PunchclockDotnet.Test.csproj", "{F4B06ACA-3FFE-4530-8EC6-597B57F77052}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{894B27DC-EE48-4013-977B-C3FFBF67021B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{894B27DC-EE48-4013-977B-C3FFBF67021B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{894B27DC-EE48-4013-977B-C3FFBF67021B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4B06ACA-3FFE-4530-8EC6-597B57F77052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4B06ACA-3FFE-4530-8EC6-597B57F77052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4B06ACA-3FFE-4530-8EC6-597B57F77052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4B06ACA-3FFE-4530-8EC6-597B57F77052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
