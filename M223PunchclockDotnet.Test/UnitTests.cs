@@ -1,3 +1,4 @@
+using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using M223PunchclockDotnet.Service;
 using Microsoft.EntityFrameworkCore;
@@ -22,18 +23,65 @@ public class Tests
     [TearDown]
     public void TearDown()
     {
-        dbContextMock?.Dispose();
+        dbContextMock.Dispose();
     }
 
     [Test]
-    public void Test1()
+    public async Task AddCategory_WithValidData_ShouldPersist()
     {
+        // Arrange
         var service = new CategoryService(dbContextMock);
+        var categoryData = new NewCategoryData
+        {
+            Title = "Test-Category"
+        };
+        
+        // Act
+        await service.AddCategory(categoryData);
+        
+        // Assert
+        var categories = await service.FindAll();
+        Assert.That(categories.Count == 1);
+        Assert.That(categories[0].Title == categoryData.Title);
     }
 
     [Test]
-    public void Test2()
+    public async Task EditCategory_WithNewTitle_TitleShouldChange()
     {
+        // Arrange
         var service = new CategoryService(dbContextMock);
+        var categoryData = new NewCategoryData
+        {
+            Title = "Test-Category"
+        };
+        await service.AddCategory(categoryData);
+        
+        // Act
+        var editedTitle = "edited-title";
+        await service.EditCategory(1, new EditedCategoryData { Title = editedTitle });
+        
+        // Assert
+        var categories = await service.FindAll();
+        Assert.That(categories.Count == 1);
+        Assert.That(categories[0].Title == editedTitle);
+    }
+
+    [Test]
+    public async Task DeleteCategory_ShouldDeletePersistedCategory()
+    {
+        // Arrange
+        var service = new CategoryService(dbContextMock);
+        var categoryData = new NewCategoryData
+        {
+            Title = "Test-Category"
+        };
+        await service.AddCategory(categoryData);
+        
+        // Act
+        await service.DeleteCategory(1);
+        
+        // Assert
+        var categories = await service.FindAll();
+        Assert.That(categories.Count == 0);
     }
 }
