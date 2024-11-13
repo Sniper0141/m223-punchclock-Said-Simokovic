@@ -2,6 +2,7 @@ using System.Net.Mime;
 using M223PunchclockDotnet.DataTransfer;
 using M223PunchclockDotnet.Model;
 using M223PunchclockDotnet.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace M223PunchclockDotnet.Controllers
@@ -31,6 +32,7 @@ namespace M223PunchclockDotnet.Controllers
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType<Entry>(StatusCodes.Status201Created)]
+        [Authorize]
         public async Task<ActionResult<Entry>> AddEntry(NewEntryData entryData){
             var newElement = await entryService.AddEntry(entryData);
 
